@@ -1,0 +1,511 @@
+/* ═══════════════════════════════════════════════════════════════
+   Global Custom Styles & Animations — Rose / Pink Theme
+   Light/Dark Mode Support via CSS Custom Properties
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════
+   Theme Custom Properties
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Light mode (default) */
+  --bg-primary: #fff5f7;
+  --bg-secondary: #ffeef2;
+  --bg-card: rgba(255, 255, 255, 0.7);
+  --bg-card-light: rgba(255, 230, 237, 0.5);
+  --bg-nav: rgba(255, 245, 247, 0.85);
+  --bg-nav-shadow: rgba(244, 63, 94, 0.08);
+  --bg-overlay: rgba(255, 245, 247, 0.95);
+  --bg-entrance: #fff5f7;
+  --bg-video-overlay-from: rgba(255, 230, 237, 0.7);
+  --bg-video-overlay-via: rgba(255, 245, 247, 0.8);
+  --bg-video-overlay-to: rgba(255, 245, 247, 0.95);
+  --text-primary: #4a1028;
+  --text-secondary: #7a3050;
+  --text-muted: rgba(120, 50, 80, 0.5);
+  --text-heading: #6b1d3f;
+  --border-subtle: rgba(244, 63, 94, 0.15);
+  --border-card: rgba(244, 63, 94, 0.12);
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(244, 63, 94, 0.15);
+  --glass-bg-light: rgba(255, 230, 237, 0.45);
+  --scrollbar-track: #fff5f7;
+  --scrollbar-border: #fff5f7;
+  --dropdown-bg: rgba(255, 245, 247, 0.95);
+  --music-option-hover: rgba(244, 63, 94, 0.08);
+  --music-option-text: rgba(120, 50, 80, 0.7);
+  --lightbox-bg: rgba(255, 245, 247, 0.92);
+  --gallery-hover-bg: rgba(255, 255, 255, 0.5);
+  --flipcard-back-from: rgba(255, 230, 237, 0.95);
+  --flipcard-back-via: rgba(255, 245, 247, 0.98);
+  --flipcard-back-to: #fff5f7;
+  --flipcard-badge-bg: rgba(255, 255, 255, 0.6);
+  --particle-color: 200, 80, 120;
+  --selection-color: white;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #000000;
+  --bg-secondary: #0d0a0e;
+  --bg-card: rgba(26, 21, 32, 0.6);
+  --bg-card-light: rgba(244, 63, 94, 0.06);
+  --bg-nav: rgba(26, 21, 32, 0.8);
+  --bg-nav-shadow: rgba(244, 63, 94, 0.12);
+  --bg-overlay: #0d0a0e;
+  --bg-entrance: #0d0a0e;
+  --bg-video-overlay-from: rgba(120, 20, 50, 0.6);
+  --bg-video-overlay-via: rgba(13, 10, 14, 0.7);
+  --bg-video-overlay-to: rgba(13, 10, 14, 0.9);
+  --text-primary: #ffffff;
+  --text-secondary: #fecdd3;
+  --text-muted: rgba(254, 205, 211, 0.4);
+  --text-heading: #fecdd3;
+  --border-subtle: rgba(244, 63, 94, 0.15);
+  --border-card: rgba(244, 63, 94, 0.1);
+  --glass-bg: rgba(26, 21, 32, 0.6);
+  --glass-border: rgba(244, 63, 94, 0.1);
+  --glass-bg-light: rgba(244, 63, 94, 0.06);
+  --scrollbar-track: #0d0a0e;
+  --scrollbar-border: #0d0a0e;
+  --dropdown-bg: rgba(26, 21, 32, 0.95);
+  --music-option-hover: rgba(244, 63, 94, 0.1);
+  --music-option-text: rgba(254, 205, 211, 0.7);
+  --lightbox-bg: rgba(13, 10, 14, 0.9);
+  --gallery-hover-bg: rgba(13, 10, 14, 0.5);
+  --flipcard-back-from: rgba(120, 20, 50, 0.9);
+  --flipcard-back-via: #1a1520;
+  --flipcard-back-to: #0d0a0e;
+  --flipcard-badge-bg: rgba(13, 10, 14, 0.5);
+  --particle-color: 244, 163, 184;
+  --selection-color: white;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Selection Color */
+::selection {
+  background-color: rgba(244, 63, 94, 0.4);
+  color: var(--selection-color);
+}
+
+/* Custom Scrollbar for Webkit Browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(244, 63, 94, 0.4), rgba(244, 63, 94, 0.2));
+  border-radius: 10px;
+  border: 2px solid var(--scrollbar-border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(244, 63, 94, 0.6), rgba(244, 63, 94, 0.3));
+}
+
+/* Custom Scrollbar for Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(244, 63, 94, 0.3) var(--scrollbar-track);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Theme Transition
+   ═══════════════════════════════════════════════════════════════ */
+
+html, body,
+.glass-card, .glass-card-light,
+.nav-btn, .flip-card-back,
+#entrance-overlay {
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Keyframe Animations
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Floating blob animation for decorative elements */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Heartbeat animation for enter button icon */
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.3);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+.heart-beat {
+  animation: heartBeat 2s infinite;
+}
+
+/* Subtle reveal up animation for content sections */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Scale-in reveal */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Gentle float animation */
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: gentleFloat 4s ease-in-out infinite;
+}
+
+/* Glow pulse */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(244, 63, 94, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(244, 63, 94, 0.25);
+  }
+}
+
+.animate-glow {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+/* Shimmer effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-line {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(244, 63, 94, 0.3) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Staggered delay utility classes
+   ═══════════════════════════════════════════════════════════════ */
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+.delay-200 {
+  animation-delay: 200ms;
+}
+.delay-300 {
+  animation-delay: 300ms;
+}
+.delay-400 {
+  animation-delay: 400ms;
+}
+.delay-500 {
+  animation-delay: 500ms;
+}
+.delay-600 {
+  animation-delay: 600ms;
+}
+.delay-700 {
+  animation-delay: 700ms;
+}
+.delay-800 {
+  animation-delay: 800ms;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Flip Card Mechanics (3D)
+   ═══════════════════════════════════════════════════════════════ */
+
+.flip-card {
+  perspective: 1000px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  border-radius: 1rem;
+}
+
+/* Flip on hover (pointer devices) */
+@media (hover: hover) {
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+/* Flip on tap (touch devices) — toggled via JS class */
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Shared face styles */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.flip-card-front {
+  z-index: 2;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+/* Subtle lift & glow on hover */
+.flip-card:hover {
+  filter: drop-shadow(0 20px 40px rgba(244, 63, 94, 0.18));
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Gallery Image Card Hover Effects
+   ═══════════════════════════════════════════════════════════════ */
+
+.gallery-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 40%,
+    rgba(13, 10, 14, 0.6) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+[data-theme="light"] .gallery-card::after,
+:root:not([data-theme="dark"]) .gallery-card::after {
+  background: linear-gradient(
+    180deg,
+    transparent 40%,
+    rgba(120, 50, 80, 0.3) 100%
+  );
+}
+
+.gallery-card:hover::after {
+  opacity: 1;
+}
+
+.gallery-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -10px rgba(244, 63, 94, 0.2);
+}
+
+.gallery-card img {
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-card:hover img {
+  transform: scale(1.08);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Lightbox Modal
+   ═══════════════════════════════════════════════════════════════ */
+
+.lightbox-backdrop {
+  backdrop-filter: blur(20px) saturate(0.5);
+  transition: opacity 0.3s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Glass card utility — theme-aware
+   ═══════════════════════════════════════════════════════════════ */
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid var(--glass-border);
+  border-radius: 1.5rem;
+}
+
+.glass-card-light {
+  background: var(--glass-bg-light);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-card);
+  border-radius: 1.25rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Touch device support — flip cards handled via .flipped class
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════
+   Nav active state — theme-aware
+   ═══════════════════════════════════════════════════════════════ */
+
+.nav-btn.active {
+  color: #e11d48;
+  background: rgba(244, 63, 94, 0.12);
+}
+
+[data-theme="dark"] .nav-btn.active {
+  color: #fda4af;
+  background: rgba(244, 63, 94, 0.12);
+}
+
+/* Playfair Display font utility */
+.font-playfair {
+  font-family: "Playfair Display", serif;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Theme Toggle Button
+   ═══════════════════════════════════════════════════════════════ */
+
+.theme-toggle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(244, 63, 94, 0.1);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  background: rgba(244, 63, 94, 0.2);
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.15);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  position: absolute;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Light mode: show moon (to switch to dark) */
+.theme-toggle .icon-sun {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+.theme-toggle .icon-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Dark mode: show sun (to switch to light) */
+[data-theme="dark"] .theme-toggle .icon-sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+[data-theme="dark"] .theme-toggle .icon-moon {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
